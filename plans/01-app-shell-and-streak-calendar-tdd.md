@@ -103,7 +103,7 @@ Factory function accepts the database (dependency injection). Intensity bucketin
 
 ---
 
-## Phase 2: SessionLifecycle — Passive Logging (4 TDD cycles)
+## Phase 2: SessionLifecycle — Passive Logging (4 TDD cycles) ✅ DONE
 
 **File:** `src/modules/session-lifecycle.ts`
 **Tests:** `src/modules/__tests__/session-lifecycle.test.ts`
@@ -139,7 +139,7 @@ function createSessionLifecycle(database: Database): SessionLifecycle
 
 ---
 
-## Phase 3: Validation & Edge Cases (3 TDD cycles)
+## Phase 3: Validation & Edge Cases (3 TDD cycles) ✅ DONE
 
 10. **Zero/negative duration rejected** — input validation at the boundary
 11. **Empty/whitespace resource label rejected** — input validation
