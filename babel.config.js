@@ -4,6 +4,7 @@ module.exports = function(api) {
     presets: ['babel-preset-expo', 'nativewind/babel'],
     plugins: [
       ['@babel/plugin-proposal-decorators', { legacy: true }],
+      ['@babel/plugin-transform-class-properties', { loose: true}],
     ],
   };
 };

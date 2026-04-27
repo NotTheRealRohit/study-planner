@@ -1,5 +1,6 @@
 import { createProgressEngine } from '../progress-engine';
 import { createSessionLifecycle } from '../session-lifecycle';
+import { createTestContext } from './test-helpers';
 
 describe('ProgressEngine reactive observation', () => {
   let database: any;
@@ -7,9 +8,10 @@ describe('ProgressEngine reactive observation', () => {
   let sessionLifecycle: ReturnType<typeof createSessionLifecycle>;
 
   beforeEach(() => {
-    database = (globalThis as any).createTestDatabase();
-    progressEngine = createProgressEngine(database);
-    sessionLifecycle = createSessionLifecycle(database);
+    const ctx = createTestContext();
+    database = ctx.database;
+    progressEngine = ctx.progressEngine;
+    sessionLifecycle = ctx.sessionLifecycle;
   });
 
   it('observable re-emits when session is written', async () => {

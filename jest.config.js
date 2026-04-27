@@ -7,6 +7,6 @@ module.exports = {
     '^@/(.*)$': './src/$1',
   },
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
-  testPathIgnorePatterns: ['<rootDir>/node_modules/'],
+  testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/src/modules/__tests__/test-helpers.ts'],
   collectCoverageFrom: ['src/**/*.{ts,tsx}'],
 };

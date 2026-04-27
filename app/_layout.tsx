@@ -8,7 +8,7 @@ import 'react-native-reanimated';
 import '../global.css';
 
 import { useColorScheme } from '@/components/useColorScheme';
-import { DatabaseProvider } from '@/src/db/DatabaseProvider';
+import { DatabaseProvider } from '@/db/DatabaseProvider';
 
 export {
   ErrorBoundary,

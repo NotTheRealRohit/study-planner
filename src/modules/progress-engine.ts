@@ -1,5 +1,6 @@
 import { Database, Q, Observable } from '@nozbe/watermelondb';
 import Session from '../db/models/Session';
+import { getMidnightUtc } from './utils/date-utils';
 
 export interface DayCell {
   date: Date;
@@ -30,12 +31,6 @@ interface Subscription {
 
 interface SimpleObservable<T> {
   subscribe(observer: ((value: T) => void) | Observer<T>): Subscription;
-}
-
-function getMidnightUtc(date: Date): number {
-  const d = new Date(date);
-  d.setUTCHours(0, 0, 0, 0);
-  return d.getTime();
 }
 
 export function createProgressEngine(database: Database): ProgressEngine {
