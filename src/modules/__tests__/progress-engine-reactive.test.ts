@@ -1,6 +1,5 @@
 import { createProgressEngine } from '../progress-engine';
-import { createSessionLifecycle, PassiveLogInput } from '../session-lifecycle';
-import Session from '../../db/models/Session';
+import { createSessionLifecycle } from '../session-lifecycle';
 
 describe('ProgressEngine reactive observation', () => {
   let database: any;
@@ -31,10 +30,6 @@ describe('ProgressEngine reactive observation', () => {
     });
 
     await new Promise((resolve) => setTimeout(resolve, 200));
-
-    const sessions = await database.get<Session>('sessions').query().fetch();
-    console.log('Sessions in DB:', sessions.length);
-    console.log('Emissions:', emissions.length);
 
     expect(emissions.length).toBeGreaterThan(1);
 

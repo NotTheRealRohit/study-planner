@@ -147,17 +147,17 @@ function createSessionLifecycle(database: Database): SessionLifecycle
 
 ---
 
-## Phase 4: Reactive Observation (1 TDD cycle)
+## Phase 4: Reactive Observation (1 TDD cycle) ✅ DONE
 
 **Tests:** `src/modules/__tests__/progress-engine-reactive.test.ts`
 
-13. **Observable re-emits when session is written** — proves acceptance criterion #9 (reactive updates without manual refresh). Uses WatermelonDB's `Query.observe()` through ProgressEngine's `observeStreakCalendar()`.
+14. **Observable re-emits when session is written** — proves acceptance criterion #9 (reactive updates without manual refresh). Uses WatermelonDB's `Query.observe()` through ProgressEngine's `observeStreakCalendar()`.
 
 ---
 
 ## Phase 5: Refactor Pass
 
-After all 13 tests pass:
+After all 14 tests pass (Phases 1-4 complete):
 - Extract test helpers (createTestDatabase, common setup)
 - Review module interfaces for unnecessary surface area
 - Check for duplication between ProgressEngine and SessionLifecycle implementations
@@ -213,7 +213,7 @@ After all 13 tests pass:
 
 ## Verification
 
-1. `npm test` — all 13 domain tests pass
+1. `npm test` — all 14 domain tests pass
 2. `npx expo start` — app launches in Expo Go (iOS) and Android emulator
 3. Walk through the manual verification checklist above
 4. Kill and relaunch to confirm persistence
