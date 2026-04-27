@@ -64,7 +64,7 @@ app/
 
 ---
 
-## Phase 1: ProgressEngine — Streak Computation (5 TDD cycles)
+## Phase 1: ProgressEngine — Streak Computation (5 TDD cycles) ✅ DONE
 
 **File:** `src/modules/progress-engine.ts`
 **Tests:** `src/modules/__tests__/progress-engine.test.ts`
@@ -95,15 +95,15 @@ Factory function accepts the database (dependency injection). Intensity bucketin
 
 ### TDD cycles
 
-1. **Empty DB → all-zero grid** — proves module construction, DB query path, return shape
-2. **Single session → nonzero cell** — proves aggregation query, single-point bucketing (intensity 4)
-3. **Multiple sessions same date → summed totalMinutes** — proves GROUP BY aggregation
-4. **Varying totals across days → intensity ordering** — asserts `more minutes ≥ higher intensity`, not exact thresholds
-5. **Sessions outside range excluded** — proves WHERE clause on date range
+1. ✅ **Empty DB → all-zero grid** — proves module construction, DB query path, return shape
+2. ✅ **Single session → nonzero cell** — proves aggregation query, single-point bucketing (intensity 4)
+3. ✅ **Multiple sessions same date → summed totalMinutes** — proves GROUP BY aggregation
+4. ✅ **Varying totals across days → intensity ordering** — asserts `more minutes ≥ higher intensity`, not exact thresholds
+5. ✅ **Sessions outside range excluded** — proves WHERE clause on date range
 
 ---
 
-## Phase 2: SessionLifecycle — Passive Logging (4 TDD cycles)
+## Phase 2: SessionLifecycle — Passive Logging (4 TDD cycles) ✅ DONE
 
 **File:** `src/modules/session-lifecycle.ts`
 **Tests:** `src/modules/__tests__/session-lifecycle.test.ts`
@@ -139,7 +139,7 @@ function createSessionLifecycle(database: Database): SessionLifecycle
 
 ---
 
-## Phase 3: Validation & Edge Cases (3 TDD cycles)
+## Phase 3: Validation & Edge Cases (3 TDD cycles) ✅ DONE
 
 10. **Zero/negative duration rejected** — input validation at the boundary
 11. **Empty/whitespace resource label rejected** — input validation
