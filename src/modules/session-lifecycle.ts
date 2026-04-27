@@ -1,5 +1,6 @@
 import { Database } from '@nozbe/watermelondb';
 import Session from '../db/models/Session';
+import { getMidnightUtc } from './utils/date-utils';
 
 export interface PassiveLogInput {
   resourceLabel: string;
@@ -16,12 +17,6 @@ export interface SessionOutcome {
 
 export interface SessionLifecycle {
   logPassive(input: PassiveLogInput): Promise<SessionOutcome>;
-}
-
-function getMidnightUtc(date: Date): number {
-  const d = new Date(date);
-  d.setUTCHours(0, 0, 0, 0);
-  return d.getTime();
 }
 
 export function createSessionLifecycle(database: Database): SessionLifecycle {

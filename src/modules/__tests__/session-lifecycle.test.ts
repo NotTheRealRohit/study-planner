@@ -1,6 +1,7 @@
 import { createSessionLifecycle, PassiveLogInput } from '../session-lifecycle';
 import { createProgressEngine } from '../progress-engine';
 import Session from '../../db/models/Session';
+import { createTestContext } from './test-helpers';
 
 describe('SessionLifecycle', () => {
   let database: any;
@@ -8,9 +9,10 @@ describe('SessionLifecycle', () => {
   let progressEngine: ReturnType<typeof createProgressEngine>;
 
   beforeEach(() => {
-    database = (globalThis as any).createTestDatabase();
-    sessionLifecycle = createSessionLifecycle(database);
-    progressEngine = createProgressEngine(database);
+    const ctx = createTestContext();
+    database = ctx.database;
+    sessionLifecycle = ctx.sessionLifecycle;
+    progressEngine = ctx.progressEngine;
   });
 
   describe('logPassive', () => {

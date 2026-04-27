@@ -1,13 +1,15 @@
 import { createProgressEngine, StreakGrid, DayCell } from '../progress-engine';
 import Session from '../../db/models/Session';
+import { createTestContext } from './test-helpers';
 
 describe('ProgressEngine', () => {
   let database: any;
   let progressEngine: ReturnType<typeof createProgressEngine>;
 
   beforeEach(() => {
-    database = (globalThis as any).createTestDatabase();
-    progressEngine = createProgressEngine(database);
+    const ctx = createTestContext();
+    database = ctx.database;
+    progressEngine = ctx.progressEngine;
   });
 
   describe('streakCalendar', () => {
