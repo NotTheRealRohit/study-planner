@@ -29,7 +29,7 @@ interface Subscription {
 }
 
 interface SimpleObservable<T> {
-  subscribe(observer: Observer<T>): Subscription;
+  subscribe(observer: ((value: T) => void) | Observer<T>): Subscription;
 }
 
 function getMidnightUtc(date: Date): number {
@@ -98,14 +98,8 @@ export function createProgressEngine(database: Database): ProgressEngine {
       const emit = async (observer: Observer<StreakGrid>) => {
         try {
           const grid = await streakCalendarFn(startDate, endDate);
-          if (
-            !previousGrid ||
-            JSON.stringify(previousGrid.cells.map((c) => c.totalMinutes)) !==
-              JSON.stringify(grid.cells.map((c) => c.totalMinutes))
-          ) {
-            previousGrid = grid;
-            observer.next(grid);
-          }
+          previousGrid = grid;
+          observer.next(grid);
         } catch (e) {
           observer.error(e);
         }
@@ -114,16 +108,24 @@ export function createProgressEngine(database: Database): ProgressEngine {
       let subscription: any = null;
 
       return {
-        subscribe(observer: Observer<StreakGrid>) {
-          emit(observer);
+        subscribe(observer: ((value: StreakGrid) => void) | Observer<StreakGrid>) {
+          const nextFn = typeof observer === 'function' ? observer : observer.next;
+          const errorFn = typeof observer === 'function' ? console.error : observer.error;
+          const wrappedObserver: Observer<StreakGrid> = {
+            next: nextFn,
+            error: errorFn,
+            complete: () => {},
+          };
+
+          emit(wrappedObserver);
 
           const collection = database.get<Session>('sessions');
           subscription = collection
             .query()
             .observe()
             .subscribe({
-              next: () => emit(observer),
-              error: (e: Error) => observer.error(e),
+              next: () => emit(wrappedObserver),
+              error: (e: Error) => wrappedObserver.error(e),
             });
 
           return {
